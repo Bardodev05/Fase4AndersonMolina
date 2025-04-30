@@ -23,6 +23,7 @@ Este proyecto es una aplicación de escritorio desarrollada en C# utilizando Win
 ## Instalación
 
 1. Clona este repositorio en tu máquina local:
+   https://github.com/Bardodev05/Fase4AndersonMolina.git 
    2. Abre el archivo de solución (`.sln`) en Visual Studio.
 3. Asegúrate de tener instalado el .NET Framework 4.7.2.
 4. Compila y ejecuta el proyecto.
