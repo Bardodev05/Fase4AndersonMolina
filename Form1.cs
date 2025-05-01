@@ -18,6 +18,8 @@ namespace Fase4NombreApellido
             if (string.IsNullOrWhiteSpace(contrasenaIngresada))
             {
                 MessageBox.Show("Por favor ingrese la contraseña.", "Campo vacío", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtContrasena.Clear(); // Limpiar el campo
+                txtContrasena.Focus(); // Enfocar el TextBox
                 return;
             }
 
@@ -33,6 +35,8 @@ namespace Fase4NombreApellido
             {
                 MessageBox.Show("Contraseña incorrecta.\n\nAsegúrese de ingresar:\n- En mayúsculas\n- Sin espacios al inicio o al final",
                     "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtContrasena.Clear(); // Limpiar el campo
+                txtContrasena.Focus(); // Enfocar el TextBox
                 return;
             }
 

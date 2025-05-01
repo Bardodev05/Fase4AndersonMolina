@@ -30,10 +30,14 @@ namespace Fase4NombreApellido
                 {
                     MessageBox.Show("El valor ya existe en el árbol.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                txtValor.Clear();
+                txtValor.Focus();
             }
             catch
             {
                 MessageBox.Show("Por favor, ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtValor.Clear();
+                txtValor.Focus(); // Enfocar el TextBox
             }
         }
 
@@ -65,40 +69,40 @@ namespace Fase4NombreApellido
             var inorden = arbol.Inorden().Split(' ');
             var postorden = arbol.Postorden().Split(' ');
 
-            AgregarNodosAlPanel(pnlPreorden, preorden);
-            AgregarNodosAlPanel(pnlInorden, inorden);
-            AgregarNodosAlPanel(pnlPostorden, postorden);
+            AgregarNodosAlPanel(flowPreorden, preorden);
+            AgregarNodosAlPanel(flowInorden, inorden);
+            AgregarNodosAlPanel(flowPostorden, postorden);
 
             pnlArbol.Invalidate(); // Redibujar árbol
         }
 
         private void LimpiarPaneles()
         {
-            pnlPreorden.Controls.Clear();
-            pnlInorden.Controls.Clear();
-            pnlPostorden.Controls.Clear();
+            flowPreorden.Controls.Clear();
+            flowInorden.Controls.Clear();
+            flowPostorden.Controls.Clear();
         }
 
-        private void AgregarNodosAlPanel(Panel panel, string[] valores)
+        private void AgregarNodosAlPanel(FlowLayoutPanel panel, string[] valores)
         {
-            int x = 10; // Posición inicial en X
+            panel.Controls.Clear();
+            panel.AutoScroll = true; // Habilitar scroll automático
+
             foreach (var valor in valores)
             {
-                Button btn = new Button
+                if (string.IsNullOrEmpty(valor)) continue;
+
+                Label lbl = new Label
                 {
                     Text = valor,
-                    Width = 25, // Tamaño más pequeño
-                    Height = 25, // Tamaño más pequeño
-                    Font = new Font("Arial", 8), // Fuente más pequeña
+                    AutoSize = true, // Ajusta el tamaño automáticamente
+                    Margin = new Padding(2),
+                    Padding = new Padding(3),
                     BackColor = Color.LightBlue,
-                    ForeColor = Color.Black,
-                    FlatStyle = FlatStyle.Flat,
+                    Font = new Font("Arial", 10, FontStyle.Bold)
                 };
-                btn.Left = x;
-                btn.Top = 5;
-                btn.Click += Btn_Click;
-                panel.Controls.Add(btn);
-                x += 30; // Espaciado horizontal menor
+
+                panel.Controls.Add(lbl);
             }
         }
 
@@ -126,12 +130,21 @@ namespace Fase4NombreApellido
             }
 
             List<NodoPosicionado> nodos = ObtenerPosicionesPorNiveles(arbol.Raiz, pnlArbol.Width, pnlArbol.Height);
+
+            // Calcular tamaño necesario y asignarlo para el scroll
+            int maxY = 0;
             foreach (var np in nodos)
             {
                 DibujarConexion(e.Graphics, np);
-                DibujarNodo(e.Graphics, np, 20); // Radio de 20
+                DibujarNodo(e.Graphics, np, 20);
+
+                if (np.Y > maxY)
+                    maxY = np.Y;
             }
+
+            pnlArbol.AutoScrollMinSize = new Size(0, maxY + 80); // Ajusta para dejar espacio
         }
+
 
         private List<NodoPosicionado> ObtenerPosicionesPorNiveles(Nodo raiz, int anchoPanel, int altoPanel)
         {
@@ -149,6 +162,7 @@ namespace Fase4NombreApellido
                 resultado.Add(new NodoPosicionado(nodo, x, y));
 
                 int desplazamiento = espacioPorNivel / (int)Math.Pow(2, nivel);
+                if (nivel == 4) desplazamiento += 20; // Incrementar espacio en el nivel 4
                 if (nivel < 4)
                 {
                     if (nodo.Izquierda != null)
@@ -160,6 +174,7 @@ namespace Fase4NombreApellido
 
             return resultado;
         }
+
 
         private void DibujarConexion(Graphics g, NodoPosicionado np)
         {
@@ -214,6 +229,15 @@ namespace Fase4NombreApellido
             {
                 Application.Exit(); // Cierra toda la aplicación
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            arbol = new ArbolBinario();  // Reiniciar el árbol
+            LimpiarPaneles();            // Limpiar Preorden, Inorden y Postorden
+            pnlArbol.Invalidate();       // Redibujar el panel (lo dejará vacío)
+            txtValor.Clear();            // Limpiar TextBox
+            txtValor.Focus();            // Devolver foco
         }
     }
 

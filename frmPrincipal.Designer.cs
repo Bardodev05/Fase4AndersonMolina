@@ -31,15 +31,16 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtValor = new System.Windows.Forms.TextBox();
-            this.pnlPreorden = new System.Windows.Forms.Panel();
-            this.pnlInorden = new System.Windows.Forms.Panel();
-            this.pnlPostorden = new System.Windows.Forms.Panel();
             this.pnlArbol = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.flowPreorden = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowInorden = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowPostorden = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAgregar
@@ -64,7 +65,6 @@
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // txtValor
             // 
@@ -74,36 +74,13 @@
             this.txtValor.Size = new System.Drawing.Size(100, 22);
             this.txtValor.TabIndex = 2;
             // 
-            // pnlPreorden
-            // 
-            this.pnlPreorden.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.pnlPreorden.Location = new System.Drawing.Point(438, 455);
-            this.pnlPreorden.Name = "pnlPreorden";
-            this.pnlPreorden.Size = new System.Drawing.Size(375, 38);
-            this.pnlPreorden.TabIndex = 3;
-            // 
-            // pnlInorden
-            // 
-            this.pnlInorden.BackColor = System.Drawing.Color.Cornsilk;
-            this.pnlInorden.Location = new System.Drawing.Point(12, 455);
-            this.pnlInorden.Name = "pnlInorden";
-            this.pnlInorden.Size = new System.Drawing.Size(375, 38);
-            this.pnlInorden.TabIndex = 4;
-            // 
-            // pnlPostorden
-            // 
-            this.pnlPostorden.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.pnlPostorden.Location = new System.Drawing.Point(12, 546);
-            this.pnlPostorden.Name = "pnlPostorden";
-            this.pnlPostorden.Size = new System.Drawing.Size(375, 41);
-            this.pnlPostorden.TabIndex = 4;
-            // 
             // pnlArbol
             // 
+            this.pnlArbol.AutoScroll = true;
             this.pnlArbol.BackColor = System.Drawing.Color.Beige;
             this.pnlArbol.Location = new System.Drawing.Point(31, 79);
             this.pnlArbol.Name = "pnlArbol";
-            this.pnlArbol.Size = new System.Drawing.Size(831, 338);
+            this.pnlArbol.Size = new System.Drawing.Size(852, 338);
             this.pnlArbol.TabIndex = 5;
             // 
             // label1
@@ -127,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 527);
+            this.label3.Location = new System.Drawing.Point(9, 561);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 16);
             this.label3.TabIndex = 8;
@@ -137,7 +114,7 @@
             // 
             this.btnSalir.BackColor = System.Drawing.Color.BurlyWood;
             this.btnSalir.ForeColor = System.Drawing.Color.Brown;
-            this.btnSalir.Location = new System.Drawing.Point(813, 561);
+            this.btnSalir.Location = new System.Drawing.Point(852, 630);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 41);
             this.btnSalir.TabIndex = 9;
@@ -154,21 +131,61 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Valor numerico";
             // 
+            // flowPreorden
+            // 
+            this.flowPreorden.AutoScroll = true;
+            this.flowPreorden.Location = new System.Drawing.Point(12, 455);
+            this.flowPreorden.Name = "flowPreorden";
+            this.flowPreorden.Size = new System.Drawing.Size(409, 68);
+            this.flowPreorden.TabIndex = 11;
+            this.flowPreorden.WrapContents = false;
+            // 
+            // flowInorden
+            // 
+            this.flowInorden.AutoScroll = true;
+            this.flowInorden.Location = new System.Drawing.Point(443, 455);
+            this.flowInorden.Name = "flowInorden";
+            this.flowInorden.Size = new System.Drawing.Size(440, 68);
+            this.flowInorden.TabIndex = 12;
+            this.flowInorden.WrapContents = false;
+            // 
+            // flowPostorden
+            // 
+            this.flowPostorden.AutoScroll = true;
+            this.flowPostorden.Location = new System.Drawing.Point(12, 603);
+            this.flowPostorden.Name = "flowPostorden";
+            this.flowPostorden.Size = new System.Drawing.Size(409, 68);
+            this.flowPostorden.TabIndex = 12;
+            this.flowPostorden.WrapContents = false;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.Chocolate;
+            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnLimpiar.Location = new System.Drawing.Point(577, 21);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(82, 43);
+            this.btnLimpiar.TabIndex = 13;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(910, 614);
+            this.ClientSize = new System.Drawing.Size(952, 685);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.flowPostorden);
+            this.Controls.Add(this.flowInorden);
+            this.Controls.Add(this.flowPreorden);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlArbol);
-            this.Controls.Add(this.pnlPostorden);
-            this.Controls.Add(this.pnlInorden);
-            this.Controls.Add(this.pnlPreorden);
             this.Controls.Add(this.txtValor);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnAgregar);
@@ -184,14 +201,15 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TextBox txtValor;
-        private System.Windows.Forms.Panel pnlPreorden;
-        private System.Windows.Forms.Panel pnlInorden;
-        private System.Windows.Forms.Panel pnlPostorden;
         private System.Windows.Forms.Panel pnlArbol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FlowLayoutPanel flowPreorden;
+        private System.Windows.Forms.FlowLayoutPanel flowInorden;
+        private System.Windows.Forms.FlowLayoutPanel flowPostorden;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

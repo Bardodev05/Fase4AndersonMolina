@@ -1,76 +1,104 @@
-﻿public class ArbolBinario
+﻿using System.Collections.Generic;
+
+namespace Fase4NombreApellido
 {
-    private Nodo raiz;
-
-    public Nodo Raiz => raiz;
-
-    public ArbolBinario()
+    public class ArbolBinario
     {
-        raiz = null;
-    }
+        private Nodo raiz;
 
-    public void Insertar(int valor)
-    {
-        raiz = InsertarRecursivo(raiz, valor);
-    }
+        public Nodo Raiz => raiz;
 
-    private Nodo InsertarRecursivo(Nodo nodo, int valor)
-    {
-        if (nodo == null)
-            return new Nodo(valor);
+        public void Insertar(int valor)
+        {
+            raiz = InsertarRecursivo(raiz, valor);
+        }
 
-        if (valor < nodo.Valor)
-            nodo.Izquierda = InsertarRecursivo(nodo.Izquierda, valor);
-        else if (valor > nodo.Valor)
-            nodo.Derecha = InsertarRecursivo(nodo.Derecha, valor);
+        private Nodo InsertarRecursivo(Nodo nodo, int valor)
+        {
+            if (nodo == null)
+                return new Nodo(valor);
 
-        return nodo;
-    }
+            if (valor < nodo.Valor)
+                nodo.Izquierda = InsertarRecursivo(nodo.Izquierda, valor);
+            else if (valor > nodo.Valor)
+                nodo.Derecha = InsertarRecursivo(nodo.Derecha, valor);
 
-    public bool Existe(int valor)
-    {
-        return ExisteRecursivo(raiz, valor);
-    }
+            return nodo;
+        }
 
-    private bool ExisteRecursivo(Nodo nodo, int valor)
-    {
-        if (nodo == null) return false;
-        if (nodo.Valor == valor) return true;
-        return valor < nodo.Valor
-            ? ExisteRecursivo(nodo.Izquierda, valor)
-            : ExisteRecursivo(nodo.Derecha, valor);
-    }
+        // Método para obtener la altura del árbol
+        public int ObtenerAltura()
+        {
+            return CalcularAltura(raiz);
+        }
 
-    public string Preorden()
-    {
-        return RecorrerPreorden(raiz).Trim();
-    }
+        private int CalcularAltura(Nodo nodo)
+        {
+            if (nodo == null) return 0;
+            return 1 + System.Math.Max(
+                CalcularAltura(nodo.Izquierda),
+                CalcularAltura(nodo.Derecha)
+            );
+        }
 
-    private string RecorrerPreorden(Nodo nodo)
-    {
-        if (nodo == null) return "";
-        return nodo.Valor + " " + RecorrerPreorden(nodo.Izquierda) + RecorrerPreorden(nodo.Derecha);
-    }
+        // Resto de métodos (Existe, Preorden, Inorden, Postorden)
+        public bool Existe(int valor)
+        {
+            return ExisteRecursivo(raiz, valor);
+        }
 
-    public string Inorden()
-    {
-        return RecorrerInorden(raiz).Trim();
-    }
+        private bool ExisteRecursivo(Nodo nodo, int valor)
+        {
+            if (nodo == null) return false;
+            if (nodo.Valor == valor) return true;
+            return valor < nodo.Valor ?
+                ExisteRecursivo(nodo.Izquierda, valor) :
+                ExisteRecursivo(nodo.Derecha, valor);
+        }
 
-    private string RecorrerInorden(Nodo nodo)
-    {
-        if (nodo == null) return "";
-        return RecorrerInorden(nodo.Izquierda) + nodo.Valor + " " + RecorrerInorden(nodo.Derecha);
-    }
+        public string Preorden()
+        {
+            List<int> resultado = new List<int>();
+            PreordenRecursivo(raiz, resultado);
+            return string.Join(" ", resultado);
+        }
 
-    public string Postorden()
-    {
-        return RecorrerPostorden(raiz).Trim();
-    }
+        private void PreordenRecursivo(Nodo nodo, List<int> lista)
+        {
+            if (nodo == null) return;
+            lista.Add(nodo.Valor);
+            PreordenRecursivo(nodo.Izquierda, lista);
+            PreordenRecursivo(nodo.Derecha, lista);
+        }
 
-    private string RecorrerPostorden(Nodo nodo)
-    {
-        if (nodo == null) return "";
-        return RecorrerPostorden(nodo.Izquierda) + RecorrerPostorden(nodo.Derecha) + nodo.Valor + " ";
+        public string Inorden()
+        {
+            List<int> resultado = new List<int>();
+            InordenRecursivo(raiz, resultado);
+            return string.Join(" ", resultado);
+        }
+
+        private void InordenRecursivo(Nodo nodo, List<int> lista)
+        {
+            if (nodo == null) return;
+            InordenRecursivo(nodo.Izquierda, lista);
+            lista.Add(nodo.Valor);
+            InordenRecursivo(nodo.Derecha, lista);
+        }
+
+        public string Postorden()
+        {
+            List<int> resultado = new List<int>();
+            PostordenRecursivo(raiz, resultado);
+            return string.Join(" ", resultado);
+        }
+
+        private void PostordenRecursivo(Nodo nodo, List<int> lista)
+        {
+            if (nodo == null) return;
+            PostordenRecursivo(nodo.Izquierda, lista);
+            PostordenRecursivo(nodo.Derecha, lista);
+            lista.Add(nodo.Valor);
+        }
     }
 }

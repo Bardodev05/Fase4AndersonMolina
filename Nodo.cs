@@ -1,13 +1,16 @@
-﻿public class Nodo
+﻿namespace Fase4NombreApellido
 {
-    public int Valor;
-    public Nodo Izquierda;
-    public Nodo Derecha;
-
-    public Nodo(int valor)
+    public class Nodo
     {
-        this.Valor = valor;
-        this.Izquierda = null;
-        this.Derecha = null;
+        public int Valor { get; set; }
+        public Nodo Izquierda { get; set; }
+        public Nodo Derecha { get; set; }
+
+        public Nodo(int valor)
+        {
+            Valor = valor;
+            Izquierda = null;
+            Derecha = null;
+        }
     }
 }
