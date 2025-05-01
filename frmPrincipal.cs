@@ -13,7 +13,7 @@ namespace Fase4NombreApellido
         {
             InitializeComponent();
             arbol = new ArbolBinario();
-            pnlArbol.Paint += PnlArbol_Paint; // Suscribir evento Paint
+            pnlArbol.Paint += PnlArbol_Paint; 
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
